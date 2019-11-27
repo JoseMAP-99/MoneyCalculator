@@ -8,15 +8,21 @@ import java.net.URLConnection;
 import java.util.Scanner;
 
 public class MoneyCalculator {
-    public static void main(String[] args) throws IOException {
-        System.out.println("Introduzca una cantidad en dólares: ");
-        Scanner scanner = new Scanner(System.in);
-        double amount = Double.parseDouble(scanner.next());
-        double exchangeRate = getExchangeRaye("USD", "EUR");
-        System.out.println(amount + " USD equivalen a " + amount*exchangeRate + "EUR");        
+    public static void main(String[] args) throws IOException {        
+        MoneyCalculator moneyCalculator = new MoneyCalculator();
+        moneyCalculator.control();
     }
     
-    private static double getExchangeRaye(String from, String to) throws IOException{
+    private double amount;
+    private double exchangeRate;
+    
+    private void control() throws IOException{
+        input();
+        process();
+        output();
+    }
+    
+    private double getExchangeRaye(String from, String to) throws IOException{
         URL url = new URL("http://free.currencyconverterapi.com/api/v5/convert?q="
                 + from + '_' + to + "&compact=ultra&apiKey=cfba020bc2a17499ee7e");
         
@@ -28,4 +34,19 @@ public class MoneyCalculator {
             return Double.parseDouble(line1);
         }
     }
+
+    private void input() {
+        System.out.println("Introduzca una cantidad en dólares: ");
+        Scanner scanner = new Scanner(System.in);
+        amount = Double.parseDouble(scanner.next());
+    }
+
+    private void process() throws IOException {
+        exchangeRate = getExchangeRaye("USD", "EUR");
+
+    }
+    
+    private void output() {
+        System.out.println(amount + " USD equivalen a " + amount*exchangeRate + "EUR"); 
+    }  
 }
