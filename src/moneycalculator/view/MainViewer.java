@@ -28,9 +28,6 @@ public class MainViewer extends javax.swing.JFrame {
         for (String isoCode : currencies.getCurrencies().keySet()) {
             inOut.addItem(isoCode); 
         }
-        if(ratesOutCombo.getSelectedIndex() != -1){
-            ratesOutCombo.removeItemAt(ratesInputCombo.getSelectedIndex());
-        }
     }
 
     /**
