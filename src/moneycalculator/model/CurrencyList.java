@@ -10,7 +10,11 @@ public class CurrencyList {
         add(new Currency("USD", "Dóla americano", "$"));
         add(new Currency("EUR", "Euro", "€"));
         add(new Currency("GBP", "Libra esterlina", "£"));
-    }      
+    } 
+    
+    public Map<String, Currency> getCurrencies(){
+        return currencies;
+    }
     
     public Currency get(String isoCode){
         return (currencies.get(isoCode.toUpperCase()));
