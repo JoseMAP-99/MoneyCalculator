@@ -1,26 +1,27 @@
 package moneycalculator.model;
 
 public class Currency {
-    private final String isoCode;
-    private final String name;
-    private final String symbol;
+    
+    private final String currencyName;    
+    private final String currencySymbol;
+    private final String id;
 
-    public Currency(String isoCode, String name, String symbol) {
-        this.isoCode = isoCode;
-        this.name = name;
-        this.symbol = symbol;
+    public Currency(String currencyName, String currencySymbol, String id) {
+        this.id = id;
+        this.currencyName = currencyName;
+        this.currencySymbol = currencySymbol;
     }
 
     public String getIsoCode() {
-        return isoCode;
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        return this.currencyName;
     }
 
     public String getSymbol() {
-        return symbol;
+        return this.currencySymbol;
     }
-        
+    
 }

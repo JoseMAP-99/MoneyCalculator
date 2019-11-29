@@ -1,26 +1,34 @@
 package moneycalculator.model;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class CurrencyList {
-    private final Map<String, Currency> currencies = new HashMap<>();
+    private Map<String, Currency> currencies = new HashMap<>();
+    private final String gsonCurrencies;
+    private final Gson gson;
 
-    public CurrencyList() {        
-        add(new Currency("USD", "Dóla americano", "$"));
-        add(new Currency("EUR", "Euro", "€"));
-        add(new Currency("GBP", "Libra esterlina", "£"));
+    public CurrencyList(String gsonCurrencies) {    
+        this.gsonCurrencies = gsonCurrencies;
+        gson = new Gson();
+        init();
     } 
     
     public Map<String, Currency> getCurrencies(){
-        return currencies;
+        Map<String,Currency> sorted = new TreeMap<>(currencies);
+        return sorted;
     }
     
     public Currency get(String isoCode){
         return (currencies.get(isoCode.toUpperCase()));
     }
-    
-    private void add(Currency currency) {
-        currencies.put(currency.getIsoCode(), currency);
+
+    private void init() {
+        Type map = new TypeToken<Map<String, Currency>>() {}.getType();
+        currencies = gson.fromJson(gsonCurrencies, map);
     }
 }
